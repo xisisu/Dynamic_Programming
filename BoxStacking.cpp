@@ -89,19 +89,28 @@ public:
 
 int main() {
     Solution sol;
-    std::vector<Box> boxes = {{1,2,3}, {2,3,4}, {3,4,5}, {5,6,7}};
-    std::cout << "input: ";
-    for (const auto& box : boxes) {
-        std::cout << "(h:" << box._height << ",w:" << box._width << ",d:" << box._depth << "), ";
-    }
-    std::cout << std::endl;
+    std::vector<std::vector<Box>> tests = {
+              {}   // empty
+            , { {1,2,3} } // 1 box
+            , { {1,2,3}, {2,3,4}, {3,4,5}, {5,6,7} } // mix case
+    };
 
-    auto res = sol.boxStacking(boxes);
-    std::cout << "stack: ";
-    for (const auto& box : res) {
-        std::cout << "(h:" << box._height << ",w:" << box._width << ",d:" << box._depth << "), ";
+    for (auto boxes : tests) {
+        std::cout << "input: ";
+        for (const auto& box : boxes) {
+            std::cout << "(h:" << box._height << ",w:" << box._width << ",d:" << box._depth << "), ";
+        }
+        std::cout << std::endl;
+
+        auto res = sol.boxStacking(boxes);
+        std::cout << "stack: ";
+        int height = 0;
+        for (const auto& box : res) {
+            std::cout << "(h:" << box._height << ",w:" << box._width << ",d:" << box._depth << "), ";
+            height += box._height;
+        }
+        std::cout << " height: " << height << std::endl << std::endl;
     }
-    std::cout << std::endl;
 
     return 0;
 }

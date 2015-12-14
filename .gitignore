@@ -77,3 +77,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.name
+.idea/codeStyleSettings.xml
+*.xml
+CMakeLists.txt
+*.iml

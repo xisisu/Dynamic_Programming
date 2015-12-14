@@ -28,7 +28,7 @@ public:
             for (auto val: coins) {
                 if (val == i) { dp[i] = 1; }    // use this coin
                 else if (val > i) { break; }  // coin is larger than current i, break (coin is sorted)
-                else { dp[i] = std::min(dp[i], dp[i-val] + 1); }
+                else { dp[i] = std::min(dp[i], dp[i-val] + 1); } // can also use a track array here to keep record
             }
         }
 

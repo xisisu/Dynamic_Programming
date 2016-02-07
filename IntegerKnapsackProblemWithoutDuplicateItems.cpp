@@ -21,7 +21,7 @@ struct Item {
 
 class Solution {
 public:
-    std::vector<Item> knapsackWithoutDuplicateItems(const std::vector<Item>& items, int weightLimit) {
+    std::vector<Item> knapsackWithoutDuplicateItemsPrint(const std::vector<Item> &items, int weightLimit) {
         // DP[i,j]: fill exactly a capacity j with subset of items 1...i
         // DP[i,j] = max{ M(i-1, j), M(i-1, j-Wi) + Vi }
         // result = max{ DP[n, j] }, where iterate all js
@@ -29,6 +29,9 @@ public:
         int N = items.size();
         int dp[N+1][weightLimit+1];
 
+        /*
+         * if want to fill the pack at *exactly* weightLimit, init the dp array to INT64_MIN
+         */
         for (int i = 0; i <= N; ++i) {
             for (int j = 0; j <= weightLimit; ++j) {
                 if (i == 0 || j == 0) { dp[i][j] = 0; }
@@ -49,7 +52,7 @@ public:
         return res;
     }
 
-    int knapsackWithoutDuplicateItems2(const std::vector<Item>& items, int weightLimit) {
+    int knapsackWithoutDuplicateItems(const std::vector<Item> &items, int weightLimit) {
         if (weightLimit <= 0 || items.empty()) { return 0; }
         int dp[weightLimit+1];
         for (int i = 0; i <= weightLimit; ++i) { dp[i] = 0; }
@@ -83,7 +86,7 @@ int main() {
             std::cout << std::endl << "limit: " << weightLimit << std::endl << "pick: ";
 
             // method 1
-            auto res = sol.knapsackWithoutDuplicateItems(test, weightLimit);
+            auto res = sol.knapsackWithoutDuplicateItemsPrint(test, weightLimit);
             int weightSum = 0, valueSum = 0;
             for (const auto& item: res) {
                 std::cout << "(w:" << item.weight << ", v:" << item.value << "), ";
@@ -93,7 +96,7 @@ int main() {
             std::cout << std::endl << "total weight: " << weightSum << ", total value: " << valueSum << std::endl;
 
             // method 2
-            std::cout << "method 2, total value is: " << sol.knapsackWithoutDuplicateItems2(test, weightLimit) << std::endl << std::endl;
+            std::cout << "method 2, total value is: " << sol.knapsackWithoutDuplicateItems(test, weightLimit) << std::endl << std::endl;
         }
     }
 

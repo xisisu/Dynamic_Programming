@@ -73,7 +73,7 @@ int main() {
             , {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1} // all same items
             , {1,2,3,4,5,6,7,8,9,10,100} // unbalanced partition
     };
-    
+
     for (auto const& test : tests) {
         // print input
         int sum = 0;

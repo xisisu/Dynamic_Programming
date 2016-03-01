@@ -21,7 +21,7 @@ public:
     std::vector<int> makingChange(const std::vector<int>& coins, int amount) {
         // dp[amount] = min(dp[amount-coins[i]] + 1)
         if (amount <= 0 || coins.size() == 0) { return std::vector<int>(); }
-        int32_t dp[amount+1];
+        int64_t dp[amount+1];
         for (int i = 0; i <= amount; ++i) { dp[i] = INT32_MAX; }
 
         for (int i = 1; i <= amount; ++i) {
@@ -29,6 +29,7 @@ public:
                 if (val == i) { dp[i] = 1; }    // use this coin
                 else if (val > i) { break; }  // coin is larger than current i, break (coin is sorted)
                 else { dp[i] = std::min(dp[i], dp[i-val] + 1); } // can also use a track array here to keep record
+                /* note here, if cannot be represented, will overflow! INT32_MAX+1 = INT32_MIN */
             }
         }
 
@@ -53,9 +54,19 @@ public:
 
 int main() {
     Solution sol;
-    std::vector<int> coins = {1, 2, 5, 10};
+//    std::vector<int> coins = {1, 2, 5, 10};
+//    std::vector<int> tests;
+//    for (int i = -1; i <= 100; ++i) tests.push_back(i);
+//    for (auto val : tests) {
+//        auto res = sol.makingChange(coins, val);
+//        std::cout << "input: " << val << ", size: " << res.size() << ", select: ";
+//        for (auto v : res) { std::cout << v << " "; }
+//        std::cout << std::endl;
+//    }
+
+    std::vector<int> coins = {83,3};
     std::vector<int> tests;
-    for (int i = -1; i <= 100; ++i) tests.push_back(i);
+    for (int i = 264; i <= 264; ++i) tests.push_back(i);
     for (auto val : tests) {
         auto res = sol.makingChange(coins, val);
         std::cout << "input: " << val << ", size: " << res.size() << ", select: ";
